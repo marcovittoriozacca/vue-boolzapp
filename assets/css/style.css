@@ -40,9 +40,14 @@ ul li:hover{
 }
 .bg-text-area{
     background-color:hsl(180, 5%, 92%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 #chat-content{
     background-image: url(../img/mine.jpg);
+    background-repeat: repeat;
 }
 .my-chat-h{
     height: calc(100% - 58px);
@@ -58,6 +63,12 @@ ul li:hover{
 .text-received,
 .text-sent{
     width: fit-content;
-    padding: 15px 50px 15px 10px;
+    padding: 15px 60px 15px 10px;
     border-radius: 4px;
+}
+
+.text-date{
+    font-size: 0.5rem;
+    right: 10px;
+    bottom: 5px;
 }

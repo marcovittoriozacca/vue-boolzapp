@@ -65,7 +65,8 @@
                                             <ul class="list-unstyled">
 
                                                 <li class="d-flex justify-content-between align-items-start p-2"
-                                                    v-for="(contact, index) in contacts" :key="index">
+                                                    v-for="(contact, index) in contacts" :key="index"
+                                                    @click="chatChange(index)">
                                                         <div class="d-flex column-gap-3">
                                                             <img :src="contact.avatar" :alt="contact.name" class="rounded rounded-circle">
                                                             <div class="d-flex flex-column">
@@ -105,27 +106,26 @@
                                             </div>
                                         </div>
 
-                                        <div class="my-chat-h position-relative">
-                                            <div id="chat-content" class="h-100 px-5 py-4">
-
+                                        <div id="chat-content" class="my-chat-h overflow-auto">
+                                            <div class="h-100 px-5 py-4 position-relative">
                                                 <div>
-                                                    <p 
+                                                    <p  class="position-relative"
                                                         v-for="(text, textIndex) in contacts[activeChat].messages" :key="textIndex"
                                                         :class="(text.status == 'sent') ? 'text-sent ms-auto' : 'text-received' "  >
                                                         {{ text.message }}
-
+                                                        <span class="position-absolute text-date">
+                                                            {{ text.date }}
+                                                        </span>
                                                     </p>
-                                                    
                                                 </div>
 
-                                            </div>
-
-                                            
-                                            <div class="position-absolute bottom-0 w-100 bg-text-area">
-                                                <div class="text-area d-flex justify-content-between align-items-center px-4 py-2">
-                                                    <i class="fa-regular fa-face-smile"></i>
-                                                    <input type="text" class="form-control myInputWidht shadow-none py-2" placeholder="Scrivi un messaggio">
-                                                    <i class="fas fa-microphone"></i>
+                                                
+                                                <div class="bg-text-area">
+                                                    <div class="text-area d-flex justify-content-between align-items-center px-4 py-2">
+                                                        <i class="fa-regular fa-face-smile"></i>
+                                                        <input @keyDown.enter="sendMessage(activeChat)" type="text" class="form-control myInputWidht shadow-none py-2" placeholder="Scrivi un messaggio" v-model="textoToSend">
+                                                        <i class="fas fa-microphone"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,7 +146,7 @@
 
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js' integrity='sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==' crossorigin='anonymous'></script>
     <script src="./assets/js/main.js"></script>

@@ -3,6 +3,8 @@ const { createApp } = Vue
 createApp({
   data() {
     return {
+        receivedMessageInterval: null,
+        textoToSend: '',
         activeChat: 0,
         contacts: [
             {
@@ -177,5 +179,37 @@ createApp({
         ]
 
     }
-  }
+  },
+  methods: {
+    chatChange(index){
+        this.activeChat = index;
+    },
+    sendMessage(activeChat){
+        if(this.textoToSend.length !== 0){
+            this.contacts[activeChat].messages.push(
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: this.textoToSend,
+                    status: 'sent',
+                }
+            )
+            this.textoToSend = '';
+
+            this.receivedMessageInterval = setInterval(() => {
+                this.contacts[activeChat].messages.push(
+                    {
+                        date: '10/01/2020 15:30:55',
+                        message: 'ok!',
+                        status: 'received',
+                    }
+                )
+                clearInterval(this.receivedMessageInterval)
+                
+            }, 1000);
+            
+        }
+
+    }
+
+  },
 }).mount('#app')
