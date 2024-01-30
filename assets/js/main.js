@@ -3,6 +3,7 @@ const { createApp } = Vue
 createApp({
   data() {
     return {
+        textToFilterContacts: '',
         receivedMessageInterval: null,
         textoToSend: '',
         activeChat: 0,
@@ -184,8 +185,10 @@ createApp({
     chatChange(index){
         this.activeChat = index;
     },
+
     sendMessage(activeChat){
         if(this.textoToSend.length !== 0){
+            clearInterval(this.receivedMessageInterval)
             this.contacts[activeChat].messages.push(
                 {
                     date: '10/01/2020 15:30:55',
@@ -206,10 +209,21 @@ createApp({
                 clearInterval(this.receivedMessageInterval)
                 
             }, 1000);
-            
         }
-
+    },
+    filterContacts(){
+        this.contacts.forEach(element => {
+            if(!element.name.toLowerCase().includes(this.textToFilterContacts.toLowerCase())){
+                return element.visible = false
+            }else{
+                return element.visible = true
+            }
+        });
     }
 
   },
+
 }).mount('#app')
+
+
+// :class="(!contact.name.toLowerCase().includes(this.textToFilterContacts.toLowerCase()))? 'd-none' : '' "

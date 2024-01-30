@@ -56,7 +56,8 @@
                                                 <span class="input-group-text" id="contactSearchbar">
                                                     <i class="fas fa-magnifying-glass"></i>
                                                 </span>
-                                                <input type="text" class="form-control shadow-none " placeholder="Cerca o inizia una nuova chat" aria-label="contact" aria-describedby="contactSearchbar">
+                                                <input type="text" class="form-control shadow-none " placeholder="Cerca o inizia una nuova chat" aria-label="contact" aria-describedby="contactSearchbar" v-model="textToFilterContacts"
+                                                @keyUp="filterContacts">
                                               </div>
                                         </div>
 
@@ -64,9 +65,11 @@
                                         <div>
                                             <ul class="list-unstyled">
 
-                                                <li class="d-flex justify-content-between align-items-start p-2"
+                                                <li
                                                     v-for="(contact, index) in contacts" :key="index"
+                                                    v-show="contact.visible"
                                                     @click="chatChange(index)">
+                                                    <div class="d-flex justify-content-between align-items-start p-2">
                                                         <div class="d-flex column-gap-3">
                                                             <img :src="contact.avatar" :alt="contact.name" class="rounded rounded-circle">
                                                             <div class="d-flex flex-column">
@@ -75,14 +78,13 @@
                                                             </div>
                                                         </div>
                                                         <span class="contact-last-msg">12:00</span>
+                                                    </div>
+                                                        
                                                 </li>
                                             </ul>
                                         </div>
 
-
                                     </div>
-
-
 
                                     <!-- right part - chat -->
                                     <div id="chat-section" class="col-8 p-0 h-100 ">
