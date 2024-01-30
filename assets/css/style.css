@@ -1,0 +1,63 @@
+body{
+    background: linear-gradient(to bottom, rgba(0,150,136,1) 17%, #D9DBD5 17%);  
+}
+.main-contacts-bg{
+    background-color: #e8e8e8;
+}
+#main-section{
+    height: 750px;
+}
+
+img{
+    height: 50px;
+}
+.fa-bell-slash{
+    font-size: 1.3rem;
+    color: hsl(199, 95%, 77%);
+    padding: 12px 10px;
+}
+.cyan-banner{
+    background-color: hsl(199, 95%, 77%);
+}
+.last-seen{
+    font-size: 0.7rem;
+}
+.contact-last-msg{
+    font-size: 0.6rem;
+}
+ul li{
+    border-top: 0.2px solid hsl(180, 5%, 92%);
+}
+ul li:hover{
+    background-color:hsl(180, 5%, 92%);
+    cursor: pointer;
+}
+.contact-chat-divisor{
+    border-right: 1px solid hsl(0, 0%, 78%);
+}
+.myInputWidht{
+    width: 90%;
+}
+.bg-text-area{
+    background-color:hsl(180, 5%, 92%);
+}
+#chat-content{
+    background-image: url(../img/mine.jpg);
+}
+.my-chat-h{
+    height: calc(100% - 58px);
+}
+
+.text-sent{
+    background-color: rgb(214, 250, 187);
+}
+.text-received{
+    background-color: white;
+}
+
+.text-received,
+.text-sent{
+    width: fit-content;
+    padding: 15px 50px 15px 10px;
+    border-radius: 4px;
+}
