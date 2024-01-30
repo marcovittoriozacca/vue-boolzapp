@@ -40,18 +40,14 @@ ul li:hover{
 }
 .bg-text-area{
     background-color:hsl(180, 5%, 92%);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+
 }
 #chat-content{
     background-image: url(../img/mine.jpg);
     background-repeat: repeat;
+    height: calc(100% - 116px);
 }
-.my-chat-h{
-    height: calc(100% - 58px);
-}
+
 
 .text-sent{
     background-color: rgb(214, 250, 187);
@@ -63,7 +59,7 @@ ul li:hover{
 .text-received,
 .text-sent{
     width: fit-content;
-    padding: 15px 60px 15px 10px;
+    padding: 18px 60px 18px 10px;
     border-radius: 4px;
 }
 
@@ -71,4 +67,26 @@ ul li:hover{
     font-size: 0.5rem;
     right: 10px;
     bottom: 5px;
+}
+
+.dropdown-position{
+    position: absolute;
+    top: 19px;
+    right: 20px;
+}
+.dropdown-position{
+    opacity: 0;
+}
+.text-content:hover .dropdown-position{
+    opacity: 1;
+}
+
+.my-list-maxW{
+    max-height: calc(100% - 254px);
+}
+.contact-icons{
+    font-size: 1.3rem;
+}
+.contact-icons i{
+    cursor: pointer;
 }

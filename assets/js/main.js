@@ -1,5 +1,5 @@
 const { createApp } = Vue
-
+const DateTime = luxon.DateTime;
 createApp({
   data() {
     return {
@@ -182,16 +182,17 @@ createApp({
     }
   },
   methods: {
+    //funzione che cambia la chat principare a destra
     chatChange(index){
         this.activeChat = index;
     },
-
+    //funzione che permette di mandare e visualizzare il messaggio dell'utente in chat (avviene anche la formattazione della data)
     sendMessage(activeChat){
         if(this.textoToSend.length !== 0){
             clearInterval(this.receivedMessageInterval)
             this.contacts[activeChat].messages.push(
                 {
-                    date: '10/01/2020 15:30:55',
+                    date: DateTime.local().toFormat('T'),
                     message: this.textoToSend,
                     status: 'sent',
                 }
@@ -201,16 +202,30 @@ createApp({
             this.receivedMessageInterval = setInterval(() => {
                 this.contacts[activeChat].messages.push(
                     {
-                        date: '10/01/2020 15:30:55',
+                        date: DateTime.local().toFormat('T'),
                         message: 'ok!',
                         status: 'received',
                     }
                 )
                 clearInterval(this.receivedMessageInterval)
-                
             }, 1000);
         }
     },
+    //funzione che mostra l'orario o il messaggio nella parte sinistra delle chat, in base al paramentro passato dall'utente
+    textOrDateDisplay(string, index){
+        const arr = this.contacts[index].messages;
+        const lastItem = arr[arr.length - 1]; 
+        if(arr.length > 0 ){
+            if(string === 'date'){
+                return lastItem.date;
+            }else{
+                return lastItem.message;
+            }
+        }else{            
+            return ''
+        }
+    },
+    //funzione che inverte il parametro di "visible" in base alla presenza di queste nel campo "name" di ogni elemento dell'array
     filterContacts(){
         this.contacts.forEach(element => {
             if(!element.name.toLowerCase().includes(this.textToFilterContacts.toLowerCase())){
@@ -219,11 +234,12 @@ createApp({
                 return element.visible = true
             }
         });
+    },
+    //funzione che permette di cancellare i messaggi
+    deleteMessagge(textIndex){
+        this.contacts[this.activeChat].messages.splice(textIndex, 1)
     }
 
   },
 
 }).mount('#app')
-
-
-// :class="(!contact.name.toLowerCase().includes(this.textToFilterContacts.toLowerCase()))? 'd-none' : '' "
