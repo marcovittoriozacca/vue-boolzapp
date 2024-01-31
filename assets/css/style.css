@@ -19,7 +19,7 @@ img{
 .cyan-banner{
     background-color: hsl(199, 95%, 77%);
 }
-.last-seen{
+.bot-status{
     font-size: 0.7rem;
 }
 .contact-last-msg{
@@ -36,7 +36,7 @@ ul li:hover{
     border-right: 1px solid hsl(0, 0%, 78%);
 }
 .myInputWidht{
-    width: 90%;
+    width: 85%;
 }
 .bg-text-area{
     background-color:hsl(180, 5%, 92%);
@@ -58,8 +58,8 @@ ul li:hover{
 
 .text-received,
 .text-sent{
-    width: fit-content;
-    padding: 18px 60px 18px 10px;
+    max-width: 45%;
+    padding: 18px 0 18px 20px;
     border-radius: 4px;
 }
 
@@ -88,5 +88,8 @@ ul li:hover{
     font-size: 1.3rem;
 }
 .contact-icons i{
+    cursor: pointer;
+}
+.pointer-class{
     cursor: pointer;
 }

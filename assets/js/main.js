@@ -3,6 +3,7 @@ const DateTime = luxon.DateTime;
 createApp({
   data() {
     return {
+        isBotTyping: false,
         textToFilterContacts: '',
         receivedMessageInterval: null,
         textoToSend: '',
@@ -177,9 +178,38 @@ createApp({
                 ],
             }
 
-        ]
+        ],
+        risposteCasuali: [
+            "Potrebbe essere.",
+            "Non posso confermare né negare.",
+            "Questa è una domanda difficile!",
+            "Assolutamente!",
+            "Sembra probabile.",
+            "Dubbio che sia così.",
+            "Chiedimi più tardi.",
+            "Non ne sono sicuro.",
+            "Le probabilità sono basse.",
+            "Fai attenzione a ciò che desideri.",
+            "Certamente!",
+            "Non contare su di me.",
+            "Le mie fonti dicono di no.",
+            "Sì, senza dubbio.",
+            "È meglio non dirtelo adesso.",
+            "Concentrati e chiedi di nuovo.",
+            "Le prospettive non sembrano buone.",
+            "Molto probabilmente.",
+            "Sì, assolutamente!",
+            "Le mie fonti dicono di sì."
+        ],
 
     }
+  },
+  created() {
+    this.contacts.forEach((element) => {
+        element.messages.forEach(elementDate => {
+            elementDate.date = this.dateToOnlyHours(elementDate.date)
+        });
+    });
   },
   methods: {
     //funzione che cambia la chat principare a destra
@@ -198,17 +228,19 @@ createApp({
                 }
             )
             this.textoToSend = '';
-
-            this.receivedMessageInterval = setInterval(() => {
+        
+            this.isBotTyping = true,
+                this.receivedMessageInterval = setInterval(() => {
                 this.contacts[activeChat].messages.push(
                     {
                         date: DateTime.local().toFormat('T'),
-                        message: 'ok!',
+                        message: this.randomAnswer(),
                         status: 'received',
                     }
                 )
+                this.isBotTyping = false
                 clearInterval(this.receivedMessageInterval)
-            }, 1000);
+            }, 2000);
         }
     },
     //funzione che mostra l'orario o il messaggio nella parte sinistra delle chat, in base al paramentro passato dall'utente
@@ -238,8 +270,18 @@ createApp({
     //funzione che permette di cancellare i messaggi
     deleteMessagge(textIndex){
         this.contacts[this.activeChat].messages.splice(textIndex, 1)
-    }
+    },
 
+    dateToOnlyHours(date){
+        const data = DateTime.fromFormat(date, 'dd/MM/yyyy HH:mm:ss');
+        const hours = data.hour;
+        const minutes = data.minute;
+        const timeString = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+        return timeString
+    },
+    randomAnswer(){
+      return this.risposteCasuali[Math.floor(Math.random() * this.risposteCasuali.length)]
+    }
   },
 
 }).mount('#app')

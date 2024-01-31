@@ -24,7 +24,7 @@
                             <div id="main-section">
                                 <div class="row h-100">
                                     <!-- left part - contacts -->
-                                    <div id="contacts-section" class="col-4 p-0 bg-light h-100 overflow-hidden ">
+                                    <div id="contacts-section" class="col-4 p-0 bg-light h-100">
                                         <!-- personal contact -->
                                         <div class="personal-contact py-1 px-2 d-flex justify-content-between main-contacts-bg contact-chat-divisor">
                                             <div class="d-flex align-items-center column-gap-3 ">
@@ -62,7 +62,7 @@
                                         </div>
 
                                         <!-- real contacts section -->
-                                        <div class="overflow-y-auto my-list-maxW">
+                                        <div class="overflow-y-scroll my-list-maxW">
                                             <ul class="list-unstyled">
                                                 <li
                                                     v-for="(contact, index) in contacts" :key="index"
@@ -73,7 +73,7 @@
                                                             <img :src="contact.avatar" :alt="contact.name" class="rounded rounded-circle">
                                                             <div class="d-flex flex-column">
                                                                 <span>{{ contact.name }}</span>
-                                                                <span class="text-secondary last-seen">{{ textOrDateDisplay('message', index) }}</span>
+                                                                <span class="text-secondary bot-status">{{ textOrDateDisplay('message', index) }}</span>
                                                             </div>
                                                         </div>
                                                         <span class="contact-last-msg">{{ textOrDateDisplay('date', index) }}</span>
@@ -95,7 +95,12 @@
                                                 </figure>
                                                 <div>
                                                     <span>{{ contacts[activeChat].name }}</span>
-                                                    <p class="p-0 m-0 last-seen">Ultimo accesso oggi alle 12:00</p>
+                                                    
+                                                    <p v-if="isBotTyping == true" class="p-0 m-0 bot-status">Sta scrivendo...</p>
+                                                    <div v-else>
+                                                        <p  v-if="contacts[activeChat].messages =='' " class="p-0 m-0 bot-status"></p>
+                                                        <p  v-else class="p-0 m-0 bot-status">Ultimo accesso oggi alle: {{ contacts[activeChat].messages[contacts[activeChat].messages.length - 1].date }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -107,8 +112,8 @@
                                         </div>
 
                                         <!-- messaggi in chat -->
-                                        <div id="chat-content" class="overflow-auto">
-                                            <div class="px-5 py-4 position-relative maxwidhtmistoarrendendo">
+                                        <div id="chat-content" class="overflow-y-scroll ">
+                                            <div class="px-5 py-4 position-relative">
                                                 <div>
                                                     
                                                     <div class="position-relative mb-3 text-content"
@@ -136,9 +141,16 @@
 
                                         <div class="bg-text-area">
                                             <div class="text-area d-flex justify-content-between align-items-center px-4 py-2">
-                                                <i class="fa-regular fa-face-smile"></i>
+
+                                                <i class="fa-regular fa-face-smile pointer-class"></i>
                                                 <input @keyDown.enter="sendMessage(activeChat)" type="text" class="form-control myInputWidht shadow-none py-2" placeholder="Scrivi un messaggio" v-model="textoToSend">
-                                                <i class="fas fa-microphone"></i>
+
+                                                <div v-if="textoToSend == ''" class="d-flex column-gap-3 ">
+                                                    <i  class="fas fa-camera pointer-class"></i>
+                                                    <i  class="fas fa-microphone pointer-class"></i>
+                                                </div>
+
+                                                <i v-else class="fas fa-paper-plane pointer-class" @click="sendMessage(activeChat)"></i>
                                             </div>
                                         </div>
 
