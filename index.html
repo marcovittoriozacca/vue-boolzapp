@@ -65,7 +65,7 @@
                                         <!-- real contacts section -->
                                         <div class="overflow-y-scroll my-list-maxH">
                                             <ul class="list-unstyled">
-                                                <li
+                                                <li :class="(activeChat == index) ? 'active' : '' "
                                                     v-for="(contact, index) in contacts" :key="index"
                                                     v-show="contact.visible"
                                                     @click="chatChange(index)">

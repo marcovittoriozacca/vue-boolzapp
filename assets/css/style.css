@@ -32,6 +32,9 @@ ul li:hover{
     background-color:hsl(180, 5%, 92%);
     cursor: pointer;
 }
+.active{
+    background-color:hsl(180, 5%, 92%);
+}
 .contact-chat-divisor{
     border-right: 1px solid hsl(0, 0%, 78%);
 }
