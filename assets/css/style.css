@@ -38,9 +38,7 @@ ul li:hover{
 .myInputWidth{
     width: 85%;
 }
-.myInputWidth-aBitLonger{
-    width: 85%;
-}
+
 
 .bg-text-area{
     background-color:hsl(180, 5%, 92%);
@@ -100,3 +98,33 @@ ul li:hover{
 .text-truncate-max-width{
     max-width: 150px;
 }
+
+@media screen and (max-width: 768px) {
+    .text-truncate-max-width{
+        max-width: 50px;
+    }
+    .text-truncate-mx-w-name{
+        max-width: 50px;
+    }
+    .myInputWidth{
+        width: 70%;
+    }
+    .my-list-maxH{
+        max-height: calc(100% - 182px);
+    }
+}
+@media screen and (max-width: 991px) {
+    .text-truncate-max-width{
+        max-width: 70px;
+    }
+    .myInputWidth{
+        width: 80%;
+    }
+}
+
+@media screen and (max-height: 800px) {
+    #main-section{
+        height: 680px;
+    }
+}
+
