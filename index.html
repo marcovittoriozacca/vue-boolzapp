@@ -51,18 +51,19 @@
                                             </div>
                                         </div>
                                         <!-- contact searchbar -->
-                                        <div>
-                                            <div class="input-group p-2">
+                                        <div class="d-flex align-items-center justify-content-center ">
+                                            <div class="input-group p-2  myInputWidth-aBitLonger">
                                                 <span class="input-group-text" id="contactSearchbar">
                                                     <i class="fas fa-magnifying-glass"></i>
                                                 </span>
                                                 <input type="text" class="form-control shadow-none " placeholder="Cerca o inizia una nuova chat" aria-label="contact" aria-describedby="contactSearchbar" v-model="textToFilterContacts"
                                                 @keyUp="filterContacts">
-                                              </div>
+                                            </div>
+                                            <i class="fas fa-plus border rounded-1 p-2 mx-1 btn" @click="addContact"></i>
                                         </div>
 
                                         <!-- real contacts section -->
-                                        <div class="overflow-y-scroll my-list-maxW">
+                                        <div class="overflow-y-scroll my-list-maxH">
                                             <ul class="list-unstyled">
                                                 <li
                                                     v-for="(contact, index) in contacts" :key="index"
@@ -73,7 +74,7 @@
                                                             <img :src="contact.avatar" :alt="contact.name" class="rounded rounded-circle">
                                                             <div class="d-flex flex-column">
                                                                 <span>{{ contact.name }}</span>
-                                                                <span class="text-secondary bot-status">{{ textOrDateDisplay('message', index) }}</span>
+                                                                <span class="text-secondary bot-status text-truncate text-truncate-max-width">{{ textOrDateDisplay('message', index) }}</span>
                                                             </div>
                                                         </div>
                                                         <span class="contact-last-msg">{{ textOrDateDisplay('date', index) }}</span>
@@ -143,7 +144,7 @@
                                             <div class="text-area d-flex justify-content-between align-items-center px-4 py-2">
 
                                                 <i class="fa-regular fa-face-smile pointer-class"></i>
-                                                <input @keyDown.enter="sendMessage(activeChat)" type="text" class="form-control myInputWidht shadow-none py-2" placeholder="Scrivi un messaggio" v-model="textoToSend">
+                                                <input @keyDown.enter="sendMessage(activeChat)" type="text" class="form-control myInputWidth shadow-none py-2" placeholder="Scrivi un messaggio" v-model="textoToSend">
 
                                                 <div v-if="textoToSend == ''" class="d-flex column-gap-3 ">
                                                     <i  class="fas fa-camera pointer-class"></i>

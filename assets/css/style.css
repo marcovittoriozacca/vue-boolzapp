@@ -35,9 +35,13 @@ ul li:hover{
 .contact-chat-divisor{
     border-right: 1px solid hsl(0, 0%, 78%);
 }
-.myInputWidht{
+.myInputWidth{
     width: 85%;
 }
+.myInputWidth-aBitLonger{
+    width: 85%;
+}
+
 .bg-text-area{
     background-color:hsl(180, 5%, 92%);
 
@@ -81,7 +85,7 @@ ul li:hover{
     opacity: 1;
 }
 
-.my-list-maxW{
+.my-list-maxH{
     max-height: calc(100% - 254px);
 }
 .contact-icons{
@@ -92,4 +96,7 @@ ul li:hover{
 }
 .pointer-class{
     cursor: pointer;
+}
+.text-truncate-max-width{
+    max-width: 150px;
 }

@@ -201,7 +201,18 @@ createApp({
             "Sì, assolutamente!",
             "Le mie fonti dicono di sì."
         ],
-
+        AddContactName: [
+            "Mario",
+            "Luigi",
+            "Giuseppe",
+            "Giovanna",
+            "Paola",
+            "Francesco",
+            "Alessia",
+            "Antonio",
+            "Roberta",
+            "Simone",
+        ],
     }
   },
   created() {
@@ -271,7 +282,7 @@ createApp({
     deleteMessagge(textIndex){
         this.contacts[this.activeChat].messages.splice(textIndex, 1)
     },
-
+    //trasforma la data di tutti gli oggetti in solo ore
     dateToOnlyHours(date){
         const data = DateTime.fromFormat(date, 'dd/MM/yyyy HH:mm:ss');
         const hours = data.hour;
@@ -279,8 +290,24 @@ createApp({
         const timeString = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
         return timeString
     },
+    //risposta random del bot in chat
     randomAnswer(){
       return this.risposteCasuali[Math.floor(Math.random() * this.risposteCasuali.length)]
+    },
+    //bottone che aggiunge un contatto con nome e foto random
+    addContact(){
+        const picsContacts = [];
+        this.contacts.forEach(element => {
+            picsContacts.push(element.avatar)
+        });
+        this.contacts.push(
+            {
+                name: this.AddContactName[Math.floor(Math.random() * this.AddContactName.length)],
+                avatar: picsContacts[Math.floor(Math.random() * picsContacts.length)],
+                visible: true,
+                messages: [],
+            }
+        )
     }
   },
 
