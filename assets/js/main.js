@@ -5,6 +5,7 @@ createApp({
     return {
         isBotTyping: false,
         textToFilterContacts: '',
+        preMessageInterval: null,
         receivedMessageInterval: null,
         textoToSend: '',
         activeChat: 0,
@@ -231,6 +232,7 @@ createApp({
     sendMessage(activeChat){
         if(this.textoToSend.length !== 0){
             clearInterval(this.receivedMessageInterval)
+            clearInterval(this.preMessageInterval)
             this.contacts[activeChat].messages.push(
                 {
                     date: DateTime.local().toFormat('T'),
@@ -239,19 +241,24 @@ createApp({
                 }
             )
             this.textoToSend = '';
-        
-            this.isBotTyping = true,
+            this.preMessageInterval = setInterval(() => {
+
+                this.isBotTyping = true
+
                 this.receivedMessageInterval = setInterval(() => {
-                this.contacts[activeChat].messages.push(
-                    {
-                        date: DateTime.local().toFormat('T'),
-                        message: this.randomAnswer(),
-                        status: 'received',
-                    }
-                )
-                this.isBotTyping = false
-                clearInterval(this.receivedMessageInterval)
-            }, 2000);
+
+                    this.contacts[activeChat].messages.push(
+                        {
+                            date: DateTime.local().toFormat('T'),
+                            message: this.randomAnswer(),
+                            status: 'received',
+                        }
+                    )
+                    this.isBotTyping = false
+                    clearInterval(this.receivedMessageInterval)
+                }, Math.floor (Math.random()*(2000-1000 + 1)+1000));
+                clearInterval(this.preMessageInterval)
+            }, Math.floor (Math.random()*(4000-1000 + 1)+1000));
         }
     },
     //funzione che mostra l'orario o il messaggio nella parte sinistra delle chat, in base al paramentro passato dall'utente
@@ -308,6 +315,13 @@ createApp({
                 messages: [],
             }
         )
+    },
+    lastSeenBot(activeChat){
+        if(this.contacts[activeChat].messages.length < 1){
+            return ''
+        }else{
+            return `Ultimo accesso oggi alle: ${this.contacts[activeChat].messages[this.contacts[activeChat].messages.length - 1].date}`
+        }
     }
   },
 

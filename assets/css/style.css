@@ -76,8 +76,8 @@ ul li:hover{
 
 .dropdown-position{
     position: absolute;
-    top: 19px;
-    right: 20px;
+    top: 0;
+    right: 10px;
 }
 .dropdown-position{
     opacity: 0;
@@ -101,8 +101,19 @@ ul li:hover{
 .text-truncate-max-width{
     max-width: 150px;
 }
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
+    .text-truncate-max-width{
+        max-width: 70px;
+    }
+    .myInputWidth{
+        width: 80%;
+    }
+    .text-received,
+    .text-sent{
+        max-width: 65%;
+    }
+}
+@media screen and (max-width: 769px) {
     .text-truncate-max-width{
         max-width: 50px;
     }
@@ -115,15 +126,12 @@ ul li:hover{
     .my-list-maxH{
         max-height: calc(100% - 182px);
     }
-}
-@media screen and (max-width: 991px) {
-    .text-truncate-max-width{
-        max-width: 70px;
-    }
-    .myInputWidth{
-        width: 80%;
+    .text-received,
+    .text-sent{
+        max-width: 90%;
     }
 }
+
 
 @media screen and (max-height: 800px) {
     #main-section{

@@ -41,7 +41,7 @@
                                         </div>
 
                                         <!-- notifications banner -->
-                                        <div class="cyan-banner p-3 column-gap-2 d-none d-md-flex">
+                                        <div class="cyan-banner p-3 column-gap-2 d-none d-md-flex align-items-center">
                                             <div>
                                                 <i class="fas fa-bell-slash bg-light rounded rounded-circle"></i>
                                             </div>
@@ -98,10 +98,8 @@
                                                     <span>{{ contacts[activeChat].name }}</span>
                                                     
                                                     <p v-if="isBotTyping == true" class="p-0 m-0 bot-status">Sta scrivendo...</p>
-                                                    <div v-else>
-                                                        <p  v-if="contacts[activeChat].messages =='' " class="p-0 m-0 bot-status"></p>
-                                                        <p  v-else class="p-0 m-0 bot-status">Ultimo accesso oggi alle: {{ contacts[activeChat].messages[contacts[activeChat].messages.length - 1].date }}</p>
-                                                    </div>
+                                                    <p  v-else class="p-0 m-0 bot-status">{{ lastSeenBot(activeChat) }}</p>
+                                                    
                                                 </div>
                                             </div>
 
